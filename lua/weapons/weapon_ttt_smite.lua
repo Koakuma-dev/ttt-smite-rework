@@ -78,6 +78,7 @@ function SWEP:Initialize()
     self.ConvarMaxAmmo = GetConVar('ttt_smite_ammo')
     self.ConvarCooldown = GetConVar('ttt_smite_cooldown')
     self.ConvarStatus = GetConVar('ttt_smite_status')
+    self.ConvarSpeech = GetConVar('ttt_smite_speech')
 
     if engine.ActiveGamemode() == 'terrortown' then
         self:SetClip1(self.ConvarMaxAmmo:GetInt())
@@ -131,7 +132,9 @@ function SWEP:PrimaryAttack()
         self:SetTargetPos(pos)
     end
 
-    self:EmitSound('ttt_smite_speech', 550)
+    if self.ConvarSpeech:GetBool() then
+        self:GetOwner():EmitSound('ttt_smite_speech', 550)
+    end
 
     local delay = self.ConvarDelay:GetFloat()
     if IsFirstTimePredicted() then
