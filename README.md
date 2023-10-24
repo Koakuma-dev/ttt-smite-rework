@@ -1,4 +1,4 @@
-# ttt-timestop
+# ttt-smite
 
 Allows you to smite your foes (and insult them).
 
