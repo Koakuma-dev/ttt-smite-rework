@@ -18,6 +18,7 @@ if engine.ActiveGamemode() ~= 'terrortown' then
 
 	SWEP.AutoSwitchTo = false
 	SWEP.AutoSwitchFrom = false
+	SWEP.Weight = 1
 else
 	SWEP.PrintName = 'ttt_smite_weapon_name'
 
@@ -57,8 +58,8 @@ if CLIENT then
 	killicon.Add('weapon_ttt_smite', 'hud/killicons/weapon_ttt_smite.vtf', Color(255, 80, 0, 255))
 end
 
-SWEP.Primary.ClipSize = 8
-SWEP.Primary.DefaultClip = 8
+SWEP.Primary.ClipSize = -1
+SWEP.Primary.DefaultClip = 3
 SWEP.Primary.Automatic = false
 SWEP.Primary.Ammo = 'AR2AltFire'
 SWEP.Primary.Delay = 10
@@ -102,7 +103,7 @@ function SWEP:SetupDataTables()
 end
 
 function SWEP:PrimaryAttack()
-	if not self:CanPrimaryAttack() then
+	if self:Ammo1() <= 0 then
 		if engine.ActiveGamemode() == 'terrortown' then
 			SafeRemoveEntityDelayed(self, 0)
 		end
