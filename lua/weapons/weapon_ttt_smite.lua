@@ -20,7 +20,7 @@ if engine.ActiveGamemode() ~= 'terrortown' then
 	SWEP.AutoSwitchFrom = false
 	SWEP.Weight = 1
 else
-	SWEP.PrintName = 'ttt_smite_weapon_name'
+	SWEP.PrintName = 'smite_name'
 
 	SWEP.Base = 'weapon_tttbase'
 
@@ -29,7 +29,8 @@ else
 
 	SWEP.EquipMenuData = {
 		type = 'item_weapon',
-		desc = 'ttt_smite_weapon_desc'
+		name = 'smite_name',
+		desc = 'smite_desc'
 	}
 
 	SWEP.Kind = WEAPON_EQUIP1
@@ -246,7 +247,7 @@ function SWEP:Charge()
 
 	if math.random() < intensity then
 		local function glow(pos)
-			local light = DynamicLight()
+			local light = DynamicLight(self:EntIndex())
 			if light then
 				light.pos = pos
 				light.r = 130
@@ -368,7 +369,7 @@ function SWEP:Spark(ent)
 	if ent:GetNWFloat('ttt_smite_spark', 0) > CurTime() then return end
 
 	if CLIENT and IsFirstTimePredicted() then
-		local light = DynamicLight()
+		local light = DynamicLight(ent:EntIndex())
 		if light then
 			light.pos = ent:GetPos() + Vector(0, 0, 50)
 			light.r = 207

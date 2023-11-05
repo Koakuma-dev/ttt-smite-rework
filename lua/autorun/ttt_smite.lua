@@ -106,11 +106,15 @@ hook.Add('PopulateToolMenu', 'SmitePopulateToolMenu', function()
 	end)
 end)
 
--- TTT/2 Compatibility
+-- TTT Compatibility
 
-if CLIENT and LANG ~= nil then
-	LANG.AddToLanguage('english', 'ttt_smite_weapon_name', 'Smite')
-	LANG.AddToLanguage('english', 'ttt_smite_weapon_desc', 'You should kill yourself, now!')
+if CLIENT then
+	hook.Add('InitPostEntity', 'SmiteInitPostEntity', function()
+		if TTT2 ~= nil or LANG == nil then return end
+
+		LANG.AddToLanguage('English', 'smite_name', 'Smite')
+		LANG.AddToLanguage('English', 'smite_desc', 'Smite your enemies with the power of lightning,\nand insult them too!')
+	end)
 end
 
 -- TTT ULX Compatibility
